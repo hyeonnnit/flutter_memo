@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MoneyPlanPage extends StatelessWidget {
-  final List<Tab> myTabs = <Tab>[
+  final List<Tab> mainTabs = <Tab>[
     Tab(text: '일일'),
     Tab(text: '달력'),
     Tab(text: '메모'),
@@ -30,12 +30,12 @@ class MoneyPlanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: myTabs.length,
+      length: mainTabs.length,
       child: Scaffold(
         appBar: _buildMoneyPlanAppBar(),
         bottomNavigationBar: _buildMoneyPlanBottomBar(),
         body: TabBarView(
-          children: myTabs.map((Tab tab) {
+          children: mainTabs.map((Tab tab) {
             return Column(
               children: [
                 MoneyplanDetail(),
@@ -49,7 +49,14 @@ class MoneyPlanPage extends StatelessWidget {
   }
 
   BottomNavigationBar _buildMoneyPlanBottomBar() {
-    return BottomNavigationBar(items: [],);
+
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.schedule), label: '기록'),
+        BottomNavigationBarItem(icon: Icon(Icons.add_chart), label: '통계'),
+        BottomNavigationBarItem(icon: Icon(Icons.money), label: '결산')
+      ],
+    );
   }
 
   AppBar _buildMoneyPlanAppBar() {
@@ -68,7 +75,7 @@ class MoneyPlanPage extends StatelessWidget {
       ],
       elevation: 0.0,
       bottom: TabBar(
-        tabs: myTabs,
+        tabs: mainTabs,
       ),
     );
   }
